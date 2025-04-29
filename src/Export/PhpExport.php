@@ -9,9 +9,14 @@ use WebChemistry\Definition\Record;
 final class PhpExport extends Exporter
 {
 
+	public const int PHP82 = 80200;
+	public const int PHP83 = 80300;
+	public const int PHP84 = 80400;
+
 	public function __construct(
 		private readonly string $file,
 		private readonly string $className,
+		private readonly int $phpVersion = PHP_VERSION_ID,
 	)
 	{
 	}
@@ -49,9 +54,12 @@ final class PhpExport extends Exporter
 				default => 'mixed',
 			};
 
-			$class->addConstant($record->key->camelCase(true), $record->value)
-				->setType($type)
+			$const = $class->addConstant($record->key->camelCase(true), $record->value)
 				->setPublic();
+
+			if ($this->phpVersion >= self::PHP83) {
+				$const->setType($type);
+			}
 		}
 
 		$printer = new Printer();
