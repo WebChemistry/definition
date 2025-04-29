@@ -87,9 +87,9 @@ final readonly class Key
 		return new self($this->name, $this->modifier, null, $this->prefix);
 	}
 
-	public function withPrefix(string $prefix): self
+	public function withPrefix(string $prefix, bool $rewrite = false): self
 	{
-		if ($this->prefix !== null) {
+		if (!$rewrite && $this->prefix !== null) {
 			throw new \LogicException('Key already has prefix.');
 		}
 

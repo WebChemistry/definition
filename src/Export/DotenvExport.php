@@ -49,7 +49,7 @@ final class DotenvExport extends Exporter
 			return $key->withPrefix($this->prefix);
 		}
 
-		return $key->withPrefix($this->prefix . '_' . $key->prefix);
+		return $key->withPrefix($this->prefix . '_' . $key->prefix, true);
 	}
 
 }
