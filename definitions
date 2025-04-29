@@ -1,0 +1,20 @@
+#!/usr/bin/php
+<?php declare(strict_types = 1);
+
+use WebChemistry\Definition\Startup;
+
+if (php_sapi_name() !== 'cli') {
+	echo 'This script can be run only in CLI mode.';
+
+	exit(1);
+}
+
+$root = __DIR__;
+
+if (!is_file($root . '/vendor/autoload.php')) {
+	$root = dirname(__DIR__, 3);
+}
+
+require $root . '/vendor/autoload.php';
+
+Startup::fromConsole($argv);

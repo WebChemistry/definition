@@ -1,0 +1,23 @@
+{
+	"name": "webchemistry/definition",
+	"type": "library",
+	"license": "MIT",
+	"require": {
+		"php": ">=8.3",
+		"symfony/string": "^7.2",
+		"nette/utils": "^4.0",
+		"nette/php-generator": "^4.1"
+	},
+	"bin": ["definitions"],
+	"autoload": {
+		"psr-4": {
+			"WebChemistry\\Definition\\": "src/"
+		}
+	},
+	"scripts": {
+		"phpstan": "phpstan analyse"
+	},
+	"require-dev": {
+		"phpstan/phpstan": "^2.1"
+	}
+}
