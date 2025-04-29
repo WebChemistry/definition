@@ -23,7 +23,7 @@ final class DotenvExport extends Exporter
 	{
 		$template = $this->createTemplateForRecords(
 			$records,
-			fn (Key $key): string => $this->addPrefix($key)->snake(),
+			fn (Key $key): string => strtoupper($this->addPrefix($key)->snake()),
 			fn (string|int|float|bool $value): string => $this->stringifyValue($value),
 		);
 
