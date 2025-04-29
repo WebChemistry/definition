@@ -21,7 +21,7 @@ final class Startup
 			throw new InvalidFileException("Input file '$file' must return callable.");
 		}
 
-		(require $file)($configuration, $builder);
+		$callable($configuration, $builder);
 
 		$records = $startConfiguration();
 		$startBuilder($records);
