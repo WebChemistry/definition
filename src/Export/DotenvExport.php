@@ -24,7 +24,7 @@ final class DotenvExport extends Exporter
 		$template = $this->createTemplateForRecords(
 			$records,
 			fn (Key $key): string => strtoupper($this->addPrefix($key)->snake()),
-			fn (string|int|float|bool $value): string => $this->stringifyValue($value),
+			fn (string|int|float|bool $value): string => $this->escapeValue($this->stringifyValue($value)),
 		);
 
 		return $template("{{key}}={{value}}\n");
@@ -50,6 +50,15 @@ final class DotenvExport extends Exporter
 		}
 
 		return $key->withPrefix($this->prefix . '_' . $key->prefix, true);
+	}
+
+	private function escapeValue(string $value): string
+	{
+		if (preg_match('#^\w+$#', $value)) {
+			return $value;
+		}
+
+		return var_export($value, true);
 	}
 
 }
